@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import ipaddress
+import os
 import subprocess
 import sys
 import threading
@@ -133,8 +134,10 @@ class Handler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    server = ThreadingHTTPServer(("127.0.0.1", 8000), Handler)
-    print("Instagram Video Downloader em http://127.0.0.1:8000")
+    host = "0.0.0.0"
+    port = int(os.environ.get("PORT", "8000"))
+    server = ThreadingHTTPServer((host, port), Handler)
+    print(f"Instagram Video Downloader em http://{host}:{port}")
     print("Pressione Ctrl+C para encerrar.")
     try:
         server.serve_forever()
