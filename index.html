@@ -1,152 +1,84 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#f7f8fc">
-    <meta name="description" content="Notícias de Alagoas, da Zona da Mata e do Brasil em um só lugar.">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Giro 360">
-    <link rel="manifest" href="./manifest.webmanifest">
-    <link rel="icon" href="./icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="./icon-180.png">
-    <link rel="stylesheet" href="./styles.css">
-    <title>Giro 360 — notícias perto de você</title>
-  </head>
-  <body>
-    <div class="app-shell">
-      <header class="topbar">
-        <a class="brand" href="./" aria-label="Giro 360, início">
-          <span class="brand-mark" aria-hidden="true">g</span>
-          <span>giro<span class="brand-accent">360</span></span>
-        </a>
-        <div class="top-actions">
-          <button class="icon-button" id="search-toggle" type="button" aria-label="Abrir busca" aria-expanded="false">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 4.5 4.5"></path></svg>
-          </button>
-          <button class="profile-button" id="install-button" type="button" hidden>Instalar app</button>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f6f2">
+  <title>BaixaVídeo — downloader de vídeos</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#19231f;background:#f7f6f2;font-synthesis:none}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#e8eee5 0,transparent 54%),#f7f6f2}
+    .wrap{width:min(100% - 36px,760px);margin:auto}.nav{height:82px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;font-weight:760;font-size:18px;letter-spacing:-.5px}.logo{width:34px;height:34px;border-radius:12px;background:#174d3c;color:white;display:grid;place-items:center}.logo svg{width:20px}.badge{font-size:12px;color:#55635b;border:1px solid #dfe4db;border-radius:999px;padding:7px 11px}
+    main{padding:70px 0 62px}.eyebrow{display:flex;align-items:center;gap:8px;color:#387259;font-weight:700;font-size:12px;letter-spacing:1.15px;text-transform:uppercase}.dot{height:8px;width:8px;border-radius:50%;background:#50a374}.hero{text-align:center}.hero .eyebrow{justify-content:center}h1{font-size:clamp(38px,7vw,58px);line-height:1.06;letter-spacing:-2.8px;margin:20px 0 17px;font-weight:740}.accent{color:#40805d}.lead{max-width:520px;margin:0 auto;color:#65716b;font-size:16px;line-height:1.7}
+    .card{margin:38px auto 0;max-width:650px;background:#fff;border:1px solid #e5e9e2;border-radius:20px;padding:10px;box-shadow:0 18px 55px #233d2810}.inputrow{display:flex;align-items:center;gap:12px;padding:6px}.linkicon{width:43px;height:43px;display:grid;place-items:center;background:#f1f5f0;color:#577362;border-radius:13px;flex:none}.linkicon svg{width:21px}.url{min-width:0;flex:1;border:0;outline:0;color:#25342c;font:inherit;font-size:15px;padding:12px 0;background:transparent}.url::placeholder{color:#a0a9a3}.submit{border:0;background:#174d3c;color:white;border-radius:13px;padding:14px 19px;font:inherit;font-weight:680;cursor:pointer;display:flex;align-items:center;gap:9px;transition:background .15s,transform .15s;white-space:nowrap}.submit:hover{background:#226348;transform:translateY(-1px)}.submit:disabled{opacity:.68;cursor:wait;transform:none}.submit svg{width:17px}.help{color:#89938d;font-size:12px;margin:12px 8px 4px}.result{display:none;margin:17px auto 0;max-width:650px;padding:16px 18px;border-radius:14px;font-size:14px;line-height:1.55}.result.visible{display:block}.result.progress{background:#eef4ed;color:#365f48}.result.error{background:#fff0eb;color:#9a452f}.result.success{background:#eef4ed;color:#365f48}.result a{display:inline-block;margin-top:7px;color:#174d3c;font-weight:700}.spinner{display:inline-block;width:14px;height:14px;border:2px solid #b7cbbb;border-top-color:#387259;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:7px}@keyframes spin{to{transform:rotate(360deg)}}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:68px 0 0}.step{padding:18px 15px;border-top:1px solid #dfe4db}.num{color:#43805d;font-size:11px;font-weight:750;letter-spacing:1px}.step h2{font-size:14px;margin:11px 0 6px;letter-spacing:-.2px}.step p{font-size:12px;line-height:1.6;color:#7b867f;margin:0}.footer{border-top:1px solid #e5e8e2;padding:21px 0 30px;color:#87918a;font-size:11px;line-height:1.7;display:flex;justify-content:space-between;gap:25px}.footer strong{color:#64716a;font-weight:650}
+    @media(max-width:560px){main{padding:49px 0}.card{padding:8px}.inputrow{gap:8px}.linkicon{width:38px;height:38px}.submit{padding:12px 13px;font-size:13px}.url{font-size:13px}.steps{gap:10px;margin-top:50px}.step{padding:15px 8px}.step h2{font-size:13px}.step p{font-size:11px}.footer{display:block}.footer span{display:block;margin-top:6px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="brand"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7.5A3.5 3.5 0 0 1 7.5 4h9A3.5 3.5 0 0 1 20 7.5v9a3.5 3.5 0 0 1-3.5 3.5h-9A3.5 3.5 0 0 1 4 16.5z"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.7" r=".8" fill="currentColor" stroke="none"/></svg></span>BaixaVídeo</div>
+      <span class="badge">Simples e gratuito</span>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="eyebrow"><span class="dot"></span> Seus vídeos, em poucos cliques</div>
+        <h1>O vídeo que você quer.<br><span class="accent">Um link e pronto.</span></h1>
+        <p class="lead">Cole o link de um vídeo público. O download começa automaticamente em sites compatíveis.</p>
+      </section>
+      <form class="card" id="form">
+        <div class="inputrow">
+          <span class="linkicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7.07 0l3-3A5 5 0 0 0 13 2.93l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3A5 5 0 0 0 11 21.07l1.71-1.71"/></svg></span>
+          <input class="url" id="url" type="url" placeholder="Cole o link do vídeo aqui" required autocomplete="url" aria-label="Link do vídeo">
+          <button class="submit" id="submit" type="submit"><span>Baixar vídeo</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 17v3h14v-3"/></svg></button>
         </div>
-      </header>
-
-      <main>
-        <section class="welcome">
-          <div>
-            <p class="eyebrow"><span class="live-dot"></span> SUA CENTRAL DE NOTÍCIAS</p>
-            <h1>O que acontece<br><span>perto de você.</span></h1>
-            <p class="welcome-copy">Alagoas, Zona da Mata e Brasil. Tudo em um só lugar.</p>
-          </div>
-          <div class="welcome-art" aria-hidden="true">
-            <span class="art-sun"></span><span class="art-hill hill-one"></span><span class="art-hill hill-two"></span>
-            <span class="art-star star-one">✳</span><span class="art-star star-two">✳</span>
-          </div>
-        </section>
-
-        <section class="search-panel" id="search-panel" hidden>
-          <label for="search-input">Buscar notícias</label>
-          <input id="search-input" type="search" placeholder="Ex.: Maceió, educação, esporte" autocomplete="off">
-        </section>
-
-        <section class="stories-section" aria-labelledby="stories-heading">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">EM TEMPO REAL</p>
-              <h2 id="stories-heading">Agora no Giro</h2>
-            </div>
-            <button class="refresh-button" id="refresh-button" type="button" aria-label="Atualizar notícias">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4.7 9a7.5 7.5 0 0 1 12.6-2L20 12M4 17v-5h5m10.3 3a7.5 7.5 0 0 1-12.6 2L4 12"></path></svg>
-              <span id="refresh-label">Atualizar</span>
-            </button>
-          </div>
-          <nav class="category-tabs" aria-label="Categorias de notícias">
-            <button class="category-tab is-active" data-category="all" type="button">Para você</button>
-            <button class="category-tab" data-category="mata" type="button">Zona da Mata <span class="tab-sparkle">✳</span></button>
-            <button class="category-tab" data-category="alagoas" type="button">Alagoas</button>
-            <button class="category-tab" data-category="brasil" type="button">Brasil</button>
-          </nav>
-          <p class="last-updated" id="last-updated" aria-live="polite">Conectando aos portais de notícias…</p>
-          <div class="error-banner" id="error-banner" role="status" hidden></div>
-          <div class="feed-grid" id="feed-grid" aria-live="polite" aria-busy="true"></div>
-          <p class="empty-state" id="empty-state" hidden>Nenhuma notícia encontrada nesta categoria por enquanto. Tente atualizar em instantes.</p>
-          <div class="loading-state" id="loading-state">
-            <span class="loading-orb"></span>
-            <p>Buscando as últimas notícias…</p>
-          </div>
-          <p class="attribution">Notícias publicadas por seus portais de origem. Toque em uma matéria para abrir a leitura dentro do Giro.</p>
-        </section>
-
-        <section class="alert-card">
-          <div class="alert-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"></path></svg>
-          </div>
-          <div class="alert-copy">
-            <h2>Notícias novas, avisos na hora</h2>
-            <p id="alert-status">Ative as notificações para receber alertas enquanto acompanha o Giro.</p>
-          </div>
-          <button class="toggle-button" id="notification-toggle" type="button" aria-pressed="false">
-            <span class="toggle-track"><span class="toggle-thumb"></span></span>
-            <span id="notification-label">Ativar</span>
-          </button>
-          <p class="alert-note">No iPhone: adicione o Giro à Tela de Início e permita notificações. O app confere o feed a cada minuto enquanto aberto; o GitHub atualiza os portais em ciclos de pelo menos 5 minutos.</p>
-        </section>
-
-        <section class="sources-section">
-          <p class="eyebrow">JORNALISMO DE VÁRIAS FONTES</p>
-          <h2>Os portais que você acompanha</h2>
-          <p>Seleção com veículos de Alagoas e do Brasil. Leia a matéria original no Giro ou abra a publicação no portal de origem.</p>
-          <div class="source-chips">
-            <span>G1 Alagoas</span><span>Gazetaweb</span><span>TNH1</span><span>7Segundos</span><span>CadaMinuto</span><span>Alagoas 24 Horas</span><span>CNN Brasil</span><span>UOL</span><span>Folha</span><span>BBC News Brasil</span><span>Agência Brasil</span><span>Poder360</span>
-          </div>
-        </section>
-      </main>
-
-      <footer class="bottom-nav" aria-label="Navegação principal">
-        <button class="bottom-link is-selected" data-category="all" type="button">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5M5.5 9v11h13V9M9.5 20v-7h5v7"></path></svg><span>Início</span>
-        </button>
-        <button class="bottom-link" data-category="mata" type="button">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-4.5 7-11a7 7 0 1 0-14 0c0 6.5 7 11 7 11Z"></path><circle cx="12" cy="10" r="2.2"></circle></svg><span>Zona da Mata</span>
-        </button>
-        <button class="bottom-link" id="bottom-alerts" type="button">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"></path></svg><span>Alertas</span>
-        </button>
-        <a class="bottom-link whatsapp-link" id="whatsapp-link" href="https://wa.me/?text=Confira%20o%20Giro%20360%2C%20sua%20central%20de%20not%C3%ADcias%3A%20https%3A%2F%2Fgiro360.app" target="_blank" rel="noopener noreferrer" aria-label="Compartilhar o Giro no WhatsApp">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 11.7a8.4 8.4 0 0 1-12.4 7.4L3 20l.9-4.8A8.4 8.4 0 1 1 20.4 11.7Z"></path><path d="M8 8.1c.2-.4.4-.4.7-.4h.4c.2 0 .3.1.4.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.2.2-.2.3-.1.5.6 1 1.4 1.8 2.5 2.3.2.1.4.1.5-.1l.7-.8c.2-.2.4-.2.6-.1l1.7.8c.2.1.4.2.4.4 0 .2-.1 1-.6 1.4-.5.5-1.4.7-2 .6-.6-.1-1.5-.4-2.5-.9a9.4 9.4 0 0 1-3.5-3.1c-.9-1.2-1.2-2.2-1.3-2.7-.1-.6.2-1.2.5-1.5Z"></path></svg><span>WhatsApp</span>
-        </a>
-      </footer>
-    </div>
-    <section class="article-reader" id="article-reader" aria-labelledby="reader-title" aria-modal="true" role="dialog" hidden>
-      <header class="reader-header">
-        <button class="reader-back" id="reader-close" type="button" aria-label="Voltar às notícias">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
-          <span>Voltar</span>
-        </button>
-        <a class="brand reader-brand" href="./" aria-label="Giro 360">
-          <span class="brand-mark" aria-hidden="true">g</span>
-          <span>giro<span class="brand-accent">360</span></span>
-        </a>
-        <span class="reader-header-spacer" aria-hidden="true"></span>
-      </header>
-      <article class="reader-article">
-        <div class="reader-media" id="reader-media"></div>
-        <div class="reader-copy">
-          <p class="reader-category" id="reader-category"></p>
-          <h1 id="reader-title"></h1>
-          <div class="reader-byline"><span id="reader-source"></span><time id="reader-time"></time></div>
-          <div class="reader-rule"></div>
-          <p class="reader-section-label">RESUMO DA NOTÍCIA</p>
-          <div class="reader-body" id="reader-body"></div>
-          <p class="reader-attribution">Este resumo usa as informações disponibilizadas pelo feed e pelos metadados públicos da notícia. O texto integral pertence ao portal de origem.</p>
-          <div class="reader-actions">
-            <a class="reader-share-whatsapp" id="reader-share-whatsapp" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 11.7a8.4 8.4 0 0 1-12.4 7.4L3 20l.9-4.8A8.4 8.4 0 1 1 20.4 11.7Z"></path><path d="M8 8.1c.2-.4.4-.4.7-.4h.4c.2 0 .3.1.4.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.2.2-.2.3-.1.5.6 1 1.4 1.8 2.5 2.3.2.1.4.1.5-.1l.7-.8c.2-.2.4-.2.6-.1l1.7.8c.2.1.4.2.4.4 0 .2-.1 1-.6 1.4-.5.5-1.4.7-2 .6-.6-.1-1.5-.4-2.5-.9a9.4 9.4 0 0 1-3.5-3.1c-.9-1.2-1.2-2.2-1.3-2.7-.1-.6.2-1.2.5-1.5Z"></path></svg>
-              Compartilhar no WhatsApp
-            </a>
-            <a class="reader-original" id="reader-original" target="_blank" rel="noopener noreferrer">Ver publicação original (opcional) ↗</a>
-          </div>
-        </div>
-      </article>
-    </section>
-    <script src="./app.js" defer></script>
-  </body>
+        <p class="help">Cole um link HTTP ou HTTPS de um site compatível. O arquivo será salvo quando estiver pronto.</p>
+      </form>
+      <div class="result" id="result" role="status" aria-live="polite"></div>
+      <section class="steps" aria-label="Como funciona">
+        <article class="step"><span class="num">01 — COPIE</span><h2>Copie o link</h2><p>No Instagram, abra o vídeo e toque em compartilhar para copiar o link.</p></article>
+        <article class="step"><span class="num">02 — COLE</span><h2>Cole aqui</h2><p>Assim que o link for reconhecido, o download começa.</p></article>
+        <article class="step"><span class="num">03 — PRONTO</span><h2>Salve automaticamente</h2><p>O vídeo é baixado assim que fica pronto.</p></article>
+      </section>
+    </main>
+    <footer class="footer"><strong>BaixaVídeo</strong><span>Use apenas com vídeos que você tem permissão para salvar. Respeite os direitos autorais e os termos dos sites.</span></footer>
+  </div>
+  <script>
+    const form=document.querySelector('#form'), input=document.querySelector('#url'), button=document.querySelector('#submit'), result=document.querySelector('#result');
+    let debounceTimer, activeUrl='';
+    function show(type,html){result.className=`result visible ${type}`;result.innerHTML=html;}
+    input.addEventListener('input',()=>{
+      clearTimeout(debounceTimer);
+      const url=input.value.trim();
+      if(!/^https?:\/\//i.test(url))return;
+      debounceTimer=setTimeout(()=>startDownload(url),500);
+    });
+    form.addEventListener('submit',event=>{event.preventDefault();startDownload(input.value.trim());});
+    async function startDownload(url){
+      if(!url||url===activeUrl)return;
+      activeUrl=url;button.disabled=true;button.querySelector('span').textContent='Baixando…';
+      show('progress','<span class="spinner"></span>Verificando o link e preparando o vídeo…');
+      try{
+        const response=await fetch('/api/download',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});
+        const data=await response.json();if(!response.ok)throw new Error(data.error||'Não foi possível iniciar o download.');
+        await poll(data.id);
+      }catch(error){show('error',escapeHtml(error.message));activeUrl='';button.disabled=false;button.querySelector('span').textContent='Baixar vídeo';}
+    }
+    async function poll(id){
+      for(let tries=0;tries<120;tries++){
+        await new Promise(resolve=>setTimeout(resolve,1500));
+        const response=await fetch(`/api/status/${id}`),data=await response.json();
+        if(data.status==='done'){
+          show('success','Seu vídeo está pronto. O download foi iniciado.');
+          const download=document.createElement('a');download.href='/api/file/'+encodeURIComponent(data.filename);download.download=data.filename;document.body.append(download);download.click();download.remove();
+          button.disabled=false;button.querySelector('span').textContent='Baixar outro vídeo';activeUrl='';return;
+        }
+        if(data.status==='error')throw new Error(data.error||'Não foi possível baixar este vídeo.');
+      }
+      throw new Error('O download demorou demais. Tente novamente.');
+    }
+    function escapeHtml(text){const el=document.createElement('span');el.textContent=text;return el.innerHTML;}
+  </script>
+</body>
 </html>
