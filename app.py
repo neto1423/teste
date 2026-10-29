@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+import os
 import json
 import ipaddress
 import os
@@ -7,7 +7,10 @@ import subprocess
 import sys
 import threading
 import uuid
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+host = "0.0.0.0"
+port = int(os.environ.get("PORT", "8000"))
+server = ThreadingHTTPServer((host, port), Handler)
+print(f"Instagram Video Downloader em http://{host}:{port}") 
 from pathlib import Path
 from urllib.parse import quote, urlparse
 
